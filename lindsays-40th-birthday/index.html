@@ -8,7 +8,7 @@
   <meta name="description" content="Lindsay turns 40! A Surrealistic Pillow picnic at the U.S. National Arboretum, Saturday, November 7, 2026, 12–3pm." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Monoton&family=Karla:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Monoton&family=VT323&family=Karla:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --cream: #fff4e2;
@@ -392,6 +392,29 @@
     footer .pillow-row svg:nth-child(odd)  { transform: rotate(-10deg); }
     footer .pillow-row svg:nth-child(even) { transform: rotate(8deg); }
 
+    /* old-school hit counter */
+    .counter { margin-top: 26px; display: grid; justify-items: center; gap: 6px; font-size: .9rem; }
+    .counter .digits {
+      display: inline-flex;
+      gap: 3px;
+      padding: 5px;
+      background: #111;
+      border: 3px ridge #b9b9b9;
+      border-radius: 4px;
+    }
+    .counter .digits span {
+      width: 24px;
+      padding: 2px 0;
+      font-family: "VT323", "Courier New", monospace;
+      font-size: 1.7rem;
+      line-height: 1;
+      text-align: center;
+      color: #39ff14;
+      text-shadow: 0 0 6px rgba(57,255,20,.75);
+      background: linear-gradient(#000 0 48%, #1b1b1b 48% 52%, #000 52%);
+    }
+    .counter[hidden] { display: none; }
+
     @media (max-width: 640px) {
       body { font-size: 17px; }
       h1 .row1 { font-size: 4.4rem; }
@@ -547,6 +570,11 @@
     </div>
     <span class="sig">See you on the lawn!</span>
     Please share this page only with invited guests.
+
+    <div class="counter" id="counter" hidden>
+      <span>You are visitor number</span>
+      <span class="digits" id="counter-digits" aria-live="polite"></span>
+    </div>
   </footer>
 
   <script>
@@ -628,6 +656,30 @@
       merry.innerHTML = text.split("").map(function (ch, i) {
         return ch === " " ? "&nbsp;" : '<span aria-hidden="true" style="--i:' + i + '">' + ch + "</span>";
       }).join("");
+    })();
+
+    // Old-school hit counter, kept by the free Abacus counting service.
+    // Each browser is counted once; repeat visits just show the total.
+    (function () {
+      var BASE = "https://abacus.jasoncameron.dev";
+      var KEY = "mvpalinkas-public-sites/lindsays-40th";
+      var SEEN = "lindsays-40th-counted";
+      var seen = false;
+      try { seen = localStorage.getItem(SEEN) === "1"; } catch (e) {}
+
+      fetch(BASE + (seen ? "/get/" : "/hit/") + KEY)
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (data) {
+          var n = Number(data.value);
+          if (!isFinite(n)) return;
+          if (!seen) { try { localStorage.setItem(SEEN, "1"); } catch (e) {} }
+          var text = String(Math.max(0, Math.floor(n))).padStart(6, "0");
+          var box = document.getElementById("counter-digits");
+          box.innerHTML = text.split("").map(function (d) { return "<span>" + d + "</span>"; }).join("");
+          box.setAttribute("aria-label", String(n));
+          document.getElementById("counter").hidden = false;
+        })
+        .catch(function () { /* service unreachable: leave the counter hidden */ });
     })();
   </script>
 </body>
