@@ -1,115 +1,634 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lindsay's 40th Birthday</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #fff9fb;
-        --card: #ffffff;
-        --text: #2a1f26;
-        --muted: #6f5a68;
-        --accent: #d63384;
-        --accent-2: #8a2be2;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Lindsay's Surrealistic Pillow Picnic</title>
+  <meta name="description" content="Lindsay turns 40! A Surrealistic Pillow picnic at the U.S. National Arboretum, Saturday, November 7, 2026, 12–3pm." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Monoton&family=Karla:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fff4e2;
+      --paper: #fffaf1;
+      --ink: #2b1838;
+      --muted: #6b5470;
+      --orange: #f26b1d;
+      --gold: #f5b82e;
+      --magenta: #d6246e;
+      --violet: #6a2c91;
+      --teal: #1f8a87;
+      --lime: #9cc93b;
+      --radius: 24px;
+    }
 
-      * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: linear-gradient(160deg, #fff9fb 0%, #f8f4ff 100%);
-        color: var(--text);
-      }
+    body {
+      margin: 0;
+      font-family: "Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
 
-      .wrap {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 24px;
-      }
+    a { color: var(--magenta); font-weight: 600; }
+    a:hover { color: var(--violet); }
 
-      .card {
-        background: var(--card);
-        border: 1px solid #f0e6ee;
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-      }
+    /* ---------- Lava-lamp blobs behind the page ---------- */
+    .lava { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .blob {
+      position: absolute;
+      width: 46vmax; height: 46vmax;
+      filter: blur(40px);
+      opacity: .38;
+      border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+      animation: morph 18s ease-in-out infinite alternate, wander 26s ease-in-out infinite alternate;
+    }
+    .b1 { background: var(--magenta); top: -10%; left: -15%; }
+    .b2 { background: var(--gold);    top: 30%;  right: -20%; animation-delay: -6s, -9s; }
+    .b3 { background: var(--teal);    bottom: -20%; left: 10%; animation-delay: -12s, -4s; }
+    .b4 { background: var(--violet);  top: 55%; left: -25%; width: 34vmax; height: 34vmax; animation-delay: -3s, -14s; }
 
-      h1 {
-        margin-top: 0;
-        font-size: clamp(1.8rem, 4vw, 2.4rem);
-        color: var(--accent);
-      }
+    @keyframes morph {
+      0%   { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+      50%  { border-radius: 63% 37% 34% 66% / 58% 62% 38% 42%; }
+      100% { border-radius: 35% 65% 52% 48% / 30% 52% 48% 70%; }
+    }
+    @keyframes wander {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(8vw, 6vh) rotate(60deg); }
+    }
 
-      .subtitle {
-        margin-top: -8px;
-        color: var(--muted);
-      }
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 72px 16px 140px;
+      color: var(--cream);
+      overflow: hidden;
+      isolation: isolate;
+    }
 
-      .details {
-        display: grid;
-        gap: 12px;
-        margin: 20px 0;
-      }
+    /* spinning sunburst + rings, slowly shifting hue */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      z-index: -2;
+      background:
+        repeating-radial-gradient(circle at 50% 50%, rgba(255,244,226,.16) 0 14px, transparent 14px 40px),
+        repeating-conic-gradient(from 0deg at 50% 50%,
+          #d6246e 0deg 10deg, #f26b1d 10deg 20deg, #f5b82e 20deg 30deg,
+          #1f8a87 30deg 40deg, #6a2c91 40deg 50deg);
+      animation: spin 90s linear infinite, hue 24s linear infinite;
+    }
+    /* dark vignette so the words stay readable */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(43,24,56,.82) 0%, rgba(43,24,56,.55) 55%, rgba(43,24,56,.1) 100%);
+    }
 
-      .details div {
-        padding: 12px 14px;
-        border-radius: 10px;
-        background: #fcf7fb;
-        border: 1px solid #f3e9f0;
-      }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes hue  { to { filter: hue-rotate(360deg); } }
 
-      .label {
-        font-weight: 700;
-        color: var(--accent-2);
-      }
+    .hero-inner { position: relative; max-width: 860px; }
 
-      .rsvp {
-        margin-top: 18px;
-        padding: 14px;
-        border-left: 4px solid var(--accent);
-        background: #fff3f9;
-        border-radius: 8px;
-      }
+    .kicker {
+      display: inline-block;
+      font-family: "Monoton", "Shrikhand", serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      letter-spacing: .12em;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(245,184,46,.7);
+    }
 
-      footer {
-        margin-top: 20px;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-    </style>
-  </head>
-  <body>
-    <main class="wrap">
-      <section class="card">
-        <h1>🎉 Lindsay's 40th Birthday 🎉</h1>
-        <p class="subtitle">Come celebrate this milestone with us!</p>
+    h1 {
+      font-family: "Shrikhand", Georgia, serif;
+      font-weight: 400;
+      line-height: .95;
+      margin: 14px 0 6px;
+    }
+    h1 .row { display: block; white-space: nowrap; }
+    h1 .row1 { font-size: clamp(3.4rem, 13vw, 7.6rem); }
+    h1 .row2 { font-size: clamp(2.6rem, 10vw, 5.8rem); margin-top: 4px; }
 
-        <div class="details">
-          <div><span class="label">Date:</span> Saturday, [Month Day, Year]</div>
-          <div><span class="label">Time:</span> [Start Time] – [End Time]</div>
-          <div><span class="label">Location:</span> [Venue Name, City]</div>
-          <div><span class="label">Theme (optional):</span> [Cocktail / Casual / etc.]</div>
+    /* each letter wobbles on its own beat */
+    .wavy span {
+      display: inline-block;
+      animation: wobble 3.2s ease-in-out infinite;
+      animation-delay: calc(var(--i) * -0.22s);
+      text-shadow: 3px 3px 0 var(--ink), 6px 6px 0 rgba(43,24,56,.45);
+    }
+    .wavy span:nth-child(5n+1) { color: var(--gold); }
+    .wavy span:nth-child(5n+2) { color: #ff8ac0; }
+    .wavy span:nth-child(5n+3) { color: #7fe0d6; }
+    .wavy span:nth-child(5n+4) { color: var(--orange); }
+    .wavy span:nth-child(5n+5) { color: #c9a6ff; }
+
+    @keyframes wobble {
+      0%, 100% { transform: translateY(0) rotate(-4deg) scaleY(1); }
+      50%      { transform: translateY(-10px) rotate(5deg) scaleY(1.08); }
+    }
+
+    .tagline {
+      font-family: "Shrikhand", Georgia, serif;
+      font-size: clamp(1.4rem, 4.4vw, 2.2rem);
+      margin: 22px 0 6px;
+      background: linear-gradient(90deg, var(--gold), #ff8ac0, #7fe0d6, var(--gold));
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: slide 8s linear infinite;
+    }
+    @keyframes slide { to { background-position: 300% 0; } }
+
+    .byline {
+      max-width: 34ch;
+      margin: 10px auto 22px;
+      font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .when-where {
+      display: inline-block;
+      font-size: clamp(1rem, 2.6vw, 1.15rem);
+      font-weight: 800;
+      margin: 0 0 26px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(255,244,226,.12);
+      border: 2px solid rgba(255,244,226,.45);
+    }
+
+    .btn {
+      display: inline-block;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      box-shadow: 4px 4px 0 var(--magenta), 8px 8px 0 var(--teal);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { color: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--magenta), 10px 10px 0 var(--teal); }
+    .btn.ghost { background: var(--cream); box-shadow: 4px 4px 0 var(--violet), 8px 8px 0 var(--orange); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+
+    /* ---------- Psychedelic pillows ---------- */
+    .pillow {
+      position: absolute;
+      width: 170px;
+      z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 16px 18px rgba(0,0,0,.35));
+      animation: float 10s ease-in-out infinite;
+    }
+    .pillow svg { display: block; width: 100%; height: auto; }
+
+    .hp1 { top: 6%;  left: 4%;  width: 180px; animation-delay: 0s; }
+    .hp2 { top: 10%; right: 5%; width: 150px; animation-delay: -2.5s; }
+    .hp3 { bottom: 12%; left: 7%; width: 140px; animation-delay: -5s; }
+    .hp4 { bottom: 9%; right: 6%; width: 200px; animation-delay: -7s; }
+    .hp5 { top: 44%; left: -2%; width: 110px; animation-delay: -3.5s; }
+    .hp6 { top: 40%; right: -1%; width: 120px; animation-delay: -8.5s; }
+
+    @keyframes float {
+      0%, 100% { translate: 0 0;      rotate: -10deg; }
+      33%      { translate: 6px -24px; rotate: 6deg; }
+      66%      { translate: -8px -8px; rotate: -2deg; }
+    }
+
+    /* ---------- Rainbow wave dividers ---------- */
+    .rainbow-wave { display: block; width: 100%; height: 70px; }
+    .hero .rainbow-wave { position: absolute; left: 0; bottom: -1px; height: 110px; }
+
+    /* ---------- Sections ---------- */
+    main { max-width: 900px; margin: 0 auto; padding: 8px 16px 40px; }
+    section { margin: 60px 0; }
+
+    h2 {
+      font-family: "Shrikhand", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.1;
+      margin: 0 0 20px;
+      color: var(--magenta);
+      text-shadow: 3px 3px 0 var(--gold), 6px 6px 0 var(--teal);
+      transform: rotate(-2deg);
+      transform-origin: left center;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 26px;
+    }
+
+    .tile {
+      position: relative;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .tile:nth-child(1) { box-shadow: 6px 6px 0 var(--gold), 12px 12px 0 var(--magenta); }
+    .tile:nth-child(2) { box-shadow: 6px 6px 0 var(--teal), 12px 12px 0 var(--violet); }
+
+    .label {
+      font-weight: 800;
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .tile .big {
+      font-family: "Shrikhand", Georgia, serif;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      margin: 6px 0 8px;
+      color: var(--violet);
+    }
+    .tile p { margin: 0 0 10px; }
+    .tile .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .95rem; }
+
+    /* map */
+    .map-callout {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      border-radius: 20px;
+      border: 3px solid var(--ink);
+      color: var(--cream);
+      font-weight: 600;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--magenta);
+    }
+    .map-callout::before {
+      content: "";
+      position: absolute;
+      inset: -100%;
+      z-index: -1;
+      background: repeating-radial-gradient(circle at 0% 50%, rgba(255,255,255,.0) 0 18px, rgba(255,255,255,.12) 18px 36px);
+    }
+    .map-callout .pin { font-size: 1.8rem; line-height: 1; }
+
+    figure.map {
+      margin: 0;
+      border: 3px solid var(--ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 7px 7px 0 var(--violet), 14px 14px 0 var(--orange);
+    }
+    figure.map a { display: block; }
+    figure.map img { display: block; width: 100%; height: auto; }
+    figure.map figcaption { padding: 14px 18px; font-size: .95rem; color: var(--muted); }
+
+    /* bring list */
+    .bring {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+    .bring li {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 6px;
+      min-height: 150px;
+      text-align: center;
+      padding: 18px 12px;
+      border: 3px solid var(--ink);
+      font-weight: 800;
+      font-size: 1.1rem;
+      animation: morph 12s ease-in-out infinite alternate;
+    }
+    .bring li .ico { font-size: 2.4rem; line-height: 1; }
+    .bring li .mini-pillow { width: 70px; }
+    .bring li:nth-child(1) { background: #ffd56b; animation-delay: 0s; }
+    .bring li:nth-child(2) { background: #ff9fca; animation-delay: -3s; }
+    .bring li:nth-child(3) { background: #8fe3d9; animation-delay: -6s; }
+    .bring li:nth-child(4) { background: #d2b6ff; animation-delay: -9s; }
+
+    .merry {
+      text-align: center;
+      font-family: "Shrikhand", Georgia, serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      margin: 8px 0 0;
+    }
+    .merry span { display: inline-block; }
+
+    /* music */
+    .music {
+      position: relative;
+      color: var(--cream);
+      border-radius: var(--radius);
+      border: 3px solid var(--ink);
+      padding: 28px;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--violet);
+    }
+    .music::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      z-index: -1;
+      background: repeating-conic-gradient(from 0deg at 50% 50%, #6a2c91 0deg 12deg, #4e1f6e 12deg 24deg);
+      animation: spin 60s linear infinite;
+    }
+    .music h2 { color: var(--gold); text-shadow: 3px 3px 0 var(--magenta), 6px 6px 0 var(--ink); }
+    .music a { color: var(--gold); }
+    .music p { position: relative; }
+    .video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      border: 3px solid var(--gold);
+      overflow: hidden;
+      background: #1c0f27;
+      margin: 16px 0 12px;
+    }
+    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    footer {
+      text-align: center;
+      padding: 30px 16px 56px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    footer .sig {
+      font-family: "Shrikhand", Georgia, serif;
+      font-size: 1.6rem;
+      color: var(--magenta);
+      text-shadow: 2px 2px 0 var(--gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+    footer .pillow-row { display: flex; justify-content: center; gap: 14px; margin-bottom: 14px; }
+    footer .pillow-row svg { width: 64px; height: auto; }
+    footer .pillow-row svg:nth-child(odd)  { transform: rotate(-10deg); }
+    footer .pillow-row svg:nth-child(even) { transform: rotate(8deg); }
+
+    @media (max-width: 640px) {
+      body { font-size: 17px; }
+      h1 .row1 { font-size: 4.4rem; }
+      h1 .row2 { font-size: 3.4rem; }
+      .when-where { border-radius: 20px; }
+      .hp1 { width: 110px; top: 3%; left: -4%; }
+      .hp2 { width: 96px; top: 4%; right: -3%; }
+      .hp3 { width: 100px; bottom: 7%; left: -2%; }
+      .hp4 { width: 120px; bottom: 5%; right: -4%; }
+      .hp5, .hp6 { display: none; }
+      .tile:nth-child(n) { box-shadow: 5px 5px 0 var(--gold), 10px 10px 0 var(--magenta); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Shared shapes for the pillows -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="pillowShape">
+        <path d="M14,16 Q100,-6 186,16 Q206,75 186,134 Q100,156 14,134 Q-6,75 14,16 Z" />
+      </clipPath>
+      <radialGradient id="pillowShade" cx="40%" cy="34%" r="75%">
+        <stop offset="0%"  stop-color="#ffffff" stop-opacity=".55" />
+        <stop offset="45%" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="100%" stop-color="#2b1838" stop-opacity=".5" />
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <div class="lava" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
+
+  <header class="hero">
+    <div class="pillow hp1" data-pillow="rings" data-palette="0"></div>
+    <div class="pillow hp2" data-pillow="flowers" data-palette="1"></div>
+    <div class="pillow hp3" data-pillow="sunburst" data-palette="2"></div>
+    <div class="pillow hp4" data-pillow="waves" data-palette="3"></div>
+    <div class="pillow hp5" data-pillow="waves" data-palette="1"></div>
+    <div class="pillow hp6" data-pillow="rings" data-palette="2"></div>
+
+    <div class="hero-inner">
+      <div class="kicker">you're invited</div>
+      <h1 aria-label="Lindsay turns 40">
+        <span class="row row1 wavy" aria-hidden="true"><span style="--i:0">L</span><span style="--i:1">i</span><span style="--i:2">n</span><span style="--i:3">d</span><span style="--i:4">s</span><span style="--i:5">a</span><span style="--i:6">y</span></span>
+        <span class="row row2 wavy" aria-hidden="true"><span style="--i:7">t</span><span style="--i:8">u</span><span style="--i:9">r</span><span style="--i:10">n</span><span style="--i:11">s</span>&nbsp;<span style="--i:12">4</span><span style="--i:13">0</span></span>
+      </h1>
+      <p class="tagline">A Surrealistic Pillow Picnic</p>
+      <p class="byline">Life is crazy and weird and now I'm turning 40… what does the future hold?</p>
+      <p class="when-where">
+        Sat, Nov 7, 2026 · 12–3pm · U.S. National Arboretum
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="#map">Find the picnic spot</a>
+        <a class="btn ghost" href="#when">Add to calendar</a>
+      </div>
+    </div>
+
+    <svg class="rainbow-wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#6a2c91" d="M0,30 C240,80 480,0 720,30 C960,60 1200,0 1440,30 L1440,110 L0,110 Z" />
+      <path fill="#1f8a87" d="M0,42 C240,92 480,12 720,42 C960,72 1200,12 1440,42 L1440,110 L0,110 Z" />
+      <path fill="#f5b82e" d="M0,54 C240,104 480,24 720,54 C960,84 1200,24 1440,54 L1440,110 L0,110 Z" />
+      <path fill="#f26b1d" d="M0,66 C240,116 480,36 720,66 C960,96 1200,36 1440,66 L1440,110 L0,110 Z" />
+      <path fill="#d6246e" d="M0,78 C240,128 480,48 720,78 C960,108 1200,48 1440,78 L1440,110 L0,110 Z" />
+      <path fill="#fff4e2" d="M0,90 C240,140 480,60 720,90 C960,120 1200,60 1440,90 L1440,110 L0,110 Z" />
+    </svg>
+  </header>
+
+  <main>
+
+    <section id="when">
+      <h2>When &amp; where</h2>
+      <div class="details">
+        <div class="tile">
+          <div class="label">When</div>
+          <div class="big">Saturday, Nov 7, 2026</div>
+          <p>12:00pm – 3:00pm</p>
+          <div class="links">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Lindsay%27s%2040th%20%E2%80%94%20Surrealistic%20Pillow%20Picnic&amp;dates=20261107T120000/20261107T150000&amp;ctz=America/New_York&amp;location=U.S.%20National%20Arboretum%2C%203501%20New%20York%20Ave%20NE%2C%20Washington%2C%20DC%2020002&amp;details=Meet%20at%20the%20picnic%20spot%20beside%20the%20National%20Capitol%20Columns.%20Bring%20a%20dish%2C%20a%20drink%2C%20a%20blanket%20and%20a%20pillow!" target="_blank" rel="noopener">Google Calendar</a>
+            <a href="lindsays-40th.ics" download>Apple / Outlook (.ics)</a>
+          </div>
         </div>
-
-        <p>
-          We’d love for you to join us for food, drinks, and a fun evening celebrating Lindsay.
-          Please let us know if you can make it!
-        </p>
-
-        <div class="rsvp">
-          <strong>RSVP by [RSVP Date]:</strong><br />
-          [Your Name / Contact Method]<br />
-          [Phone or Email]
+        <div class="tile">
+          <div class="label">Where</div>
+          <div class="big">U.S. National Arboretum</div>
+          <p>3501 New York Ave NE<br />Washington, DC 20002</p>
+          <div class="links">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=National+Capitol+Columns+US+National+Arboretum+Washington+DC" target="_blank" rel="noopener">Directions</a>
+            <a href="#map">See the picnic spot ↓</a>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <footer>
-          Please don’t share this page publicly beyond invited guests.
-        </footer>
-      </section>
-    </main>
-  </body>
+    <section id="map">
+      <h2>Meet us at the picnic spot</h2>
+      <div class="map-callout">
+        <span class="pin" aria-hidden="true">📍</span>
+        <span>Look for the red birthday-cake pin on the map below. That's where we'll be!
+        It's on the lawn just south of the reflecting pool, beside the National Capitol Columns.
+        Head there when you arrive.</span>
+      </div>
+      <figure class="map">
+        <a href="images/picnic-map.webp" target="_blank" rel="noopener" title="Open full-size map">
+          <img src="images/picnic-map.webp" width="1388" height="980"
+               alt="Aerial map of the National Capitol Columns at the U.S. National Arboretum. A red birthday-cake pin labeled 'Picnic Spot' marks the lawn just south of the reflecting pool, beside the columns." />
+        </a>
+        <figcaption>The red pin marks our picnic spot, beside the National Capitol Columns. Tap the map to see it full size.</figcaption>
+      </figure>
+    </section>
+
+    <section id="bring">
+      <h2>What to bring</h2>
+      <ul class="bring">
+        <li><span class="ico" aria-hidden="true">🥗</span>A dish</li>
+        <li><span class="ico" aria-hidden="true">🍷</span>A drink</li>
+        <li><span class="ico" aria-hidden="true">🧺</span>A blanket</li>
+        <li><span class="mini-pillow" data-pillow="rings" data-palette="0" aria-hidden="true"></span>A pillow</li>
+      </ul>
+      <p class="merry wavy" aria-label="…and come eat and be merry!"></p>
+    </section>
+
+    <section class="music" id="music">
+      <h2>Set the mood</h2>
+      <p>The theme is <strong>Surrealistic Pillow</strong>, after Jefferson Airplane's 1967 album.
+        Put this on and get your head in the clouds.</p>
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/KRjbjUR-0LE"
+                title="Jefferson Airplane — Surrealistic Pillow"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <p><a href="https://www.youtube.com/watch?v=KRjbjUR-0LE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="pillow-row" aria-hidden="true">
+      <span data-pillow="sunburst" data-palette="1"></span>
+      <span data-pillow="flowers" data-palette="3"></span>
+      <span data-pillow="waves" data-palette="0"></span>
+    </div>
+    <span class="sig">See you on the lawn!</span>
+    Please share this page only with invited guests.
+  </footer>
+
+  <script>
+    // Builds the psychedelic pillow SVGs.
+    (function () {
+      var PALETTES = [
+        ["#d6246e", "#f5b82e", "#f26b1d", "#6a2c91", "#1f8a87"],
+        ["#1f8a87", "#f5b82e", "#d6246e", "#9cc93b", "#6a2c91"],
+        ["#6a2c91", "#f26b1d", "#ff8ac0", "#f5b82e", "#1f8a87"],
+        ["#f26b1d", "#6a2c91", "#9cc93b", "#d6246e", "#f5b82e"]
+      ];
+
+      var designs = {
+        rings: function (c) {
+          var s = "";
+          for (var r = 140, i = 0; r > 0; r -= 13, i++) {
+            s += '<circle cx="100" cy="75" r="' + r + '" fill="' + c[i % c.length] + '"/>';
+          }
+          return s;
+        },
+        sunburst: function (c) {
+          var s = '<rect x="-20" y="-20" width="240" height="190" fill="' + c[0] + '"/>';
+          var n = 20;
+          for (var i = 0; i < n; i++) {
+            var a1 = (i / n) * Math.PI * 2, a2 = ((i + 0.5) / n) * Math.PI * 2;
+            s += '<polygon points="100,75 ' +
+              (100 + 220 * Math.cos(a1)).toFixed(1) + "," + (75 + 220 * Math.sin(a1)).toFixed(1) + " " +
+              (100 + 220 * Math.cos(a2)).toFixed(1) + "," + (75 + 220 * Math.sin(a2)).toFixed(1) +
+              '" fill="' + c[1 + (i % 3)] + '"/>';
+          }
+          s += '<circle cx="100" cy="75" r="26" fill="' + c[4] + '"/><circle cx="100" cy="75" r="14" fill="' + c[1] + '"/>';
+          return s;
+        },
+        waves: function (c) {
+          var s = '<rect x="-20" y="-20" width="240" height="190" fill="' + c[0] + '"/>';
+          for (var i = 0, y = -10; y < 180; y += 16, i++) {
+            s += '<path d="M-20,' + y + " Q10," + (y - 14) + " 40," + y + " T100," + y + " T160," + y + " T220," + y +
+              '" fill="none" stroke="' + c[1 + (i % 4)] + '" stroke-width="9" stroke-linecap="round"/>';
+          }
+          return s;
+        },
+        flowers: function (c) {
+          var s = '<rect x="-20" y="-20" width="240" height="190" fill="' + c[0] + '"/>';
+          var spots = [[40, 40, 22], [120, 30, 16], [165, 85, 24], [70, 105, 26], [140, 135, 14], [10, 120, 14], [100, 72, 10]];
+          spots.forEach(function (p, k) {
+            var x = p[0], y = p[1], r = p[2], petal = c[1 + (k % 3)];
+            for (var j = 0; j < 6; j++) {
+              var a = (j / 6) * Math.PI * 2;
+              s += '<circle cx="' + (x + r * 0.75 * Math.cos(a)).toFixed(1) + '" cy="' + (y + r * 0.75 * Math.sin(a)).toFixed(1) +
+                '" r="' + (r * 0.5).toFixed(1) + '" fill="' + petal + '"/>';
+            }
+            s += '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.42).toFixed(1) + '" fill="' + c[4] + '"/>';
+          });
+          return s;
+        }
+      };
+
+      function pillowSVG(design, pal) {
+        var c = PALETTES[pal] || PALETTES[0];
+        var shape = "M14,16 Q100,-6 186,16 Q206,75 186,134 Q100,156 14,134 Q-6,75 14,16 Z";
+        var corners = [[14, 16], [186, 16], [186, 134], [14, 134]];
+        var tassels = corners.map(function (p) {
+          return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="8" fill="' + c[1] + '" stroke="#2b1838" stroke-width="3"/>';
+        }).join("");
+        return '<svg viewBox="-14 -14 228 178" xmlns="http://www.w3.org/2000/svg">' +
+          '<g clip-path="url(#pillowShape)">' + designs[design](c) + "</g>" +
+          '<path d="' + shape + '" fill="url(#pillowShade)"/>' +
+          '<path d="' + shape + '" fill="none" stroke="#2b1838" stroke-width="4" stroke-linejoin="round"/>' +
+          tassels + "</svg>";
+      }
+
+      document.querySelectorAll("[data-pillow]").forEach(function (el) {
+        el.innerHTML = pillowSVG(el.getAttribute("data-pillow"), +el.getAttribute("data-palette"));
+      });
+
+      // Wobbly letters for the "be merry" line.
+      var merry = document.querySelector(".merry");
+      var text = "…and come eat and be merry!";
+      merry.innerHTML = text.split("").map(function (ch, i) {
+        return ch === " " ? "&nbsp;" : '<span aria-hidden="true" style="--i:' + i + '">' + ch + "</span>";
+      }).join("");
+    })();
+  </script>
+</body>
 </html>
