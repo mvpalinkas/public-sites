@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//public-sites//Lindsay 40th//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:lindsays-40th-20261107@public-sites
+DTSTAMP:20261024T000000Z
+DTSTART:20261107T170000Z
+DTEND:20261107T200000Z
+SUMMARY:Lindsay's 40th - Surrealistic Pillow Picnic
+LOCATION:U.S. National Arboretum\, 3501 New York Ave NE\, Washington\, DC 20002
+DESCRIPTION:Meet at the picnic spot beside the National Capitol Columns. Bring a dish\, a drink\, a blanket and a pillow!
+END:VEVENT
+END:VCALENDAR
